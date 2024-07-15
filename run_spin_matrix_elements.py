@@ -128,6 +128,7 @@ for spin_element_index in range(num_elements):
     m_left, m_right = sum(left), sum(right) # Count number of DOWN (1) spins
     sk_lefts, sk_rights = m_index[:,m_left], m_index[:,m_right]
     allowed_s = np.where((sk_lefts >= 0) & (sk_rights >= 0))[0]
+    old_Stot=-1 # Counter to keep track of which total S we have already seen
     for s in allowed_s:
         k_left, k_right = sk_lefts[s], sk_rights[s]
         vec_left, vec_right = spinrep[s][k_left], spinrep[s][k_right]
@@ -153,7 +154,10 @@ for spin_element_index in range(num_elements):
         NCmr=comb(ntls,m_right)
         
         #        print(f'lambda={spin_element_index:4d}, partitions={partitions}, count={len(rdm_coords):4d},    ml={m_left}, mr={m_right}, NCml={NCml:3d}, NCmr={NCmr:3d}, sigma={sigma[s]},    overlap=sqrt({num_sq_int/gcd_val:.0f}/{den_sq_int/gcd_val:.0f})')
-        print(f'lambda={spin_element_index:4d}, partitions={partitions}, count={len(rdm_coords):4d},    ml={m_left}, mr={m_right}, NCml={NCml:3d}, NCmr={NCmr:3d}, sigma={sigma[s]}, S={sigma[s][-1]}    overlap=sqrt({overlap**2:.2f})')
+        #print(f'lambda={spin_element_index:4d}, partitions={partitions}, count={len(rdm_coords):4d},    ml={m_left}, mr={m_right}, NCml={NCml:3d}, NCmr={NCmr:3d}, sigma={sigma[s]}, S={sigma[s][-1]}    overlap=sqrt({overlap**2:.2f})')
+        if (sigma[s][-1] != old_Stot):
+            print(f'lambda={spin_element_index:4d}, partitions={partitions},  S={sigma[s][-1]}    overlap=sqrt({overlap**2:.2f})')
+        old_Stot=sigma[s][-1]
 
         
     pbar.update(spin_element_index)
