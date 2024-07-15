@@ -38,8 +38,7 @@ def timeit(func, msg, *args):
     print('done ({:.0f}s)'.format(time()-t0))
     return res
 
-#ntls = int(sys.argv[1]) # number of TLS
-ntls=6
+ntls = int(sys.argv[1]) # number of TLS
 
 # Split into two almost equal parts (equal if ntls is integer).
 # Record botht the number of spins and the Sa, Sb values for Clebsch 
@@ -235,7 +234,7 @@ for spin_element_index in range(num_elements):
     for iS in range(size):
         Stot=mz_max+iS
         overlap=melem[iS]
-        print(f'lambda={spin_element_index:4d}, partitions={partitions}, S={Stot},    overlap=sqrt({overlap**2:.2f})')
+        print(f'lambda={spin_element_index:4d}, partitions={partition}, S={Stot},    overlap=sqrt({overlap**2:.2f})')
             
 
 
